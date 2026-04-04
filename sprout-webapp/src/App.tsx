@@ -25,7 +25,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/create-task" element={<CreateTaskPage />} />
       </Routes>
-      <Toaster />
+      <Toaster position="top-right" />
     </Suspense>
   );
 }
