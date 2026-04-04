@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  sprout-db:
+    image: postgres:13
+    container_name: sprout_postgres
+    restart: always
+    ports:
+      - '5438:5432'
+    env_file:
+      - .env
+    networks:
+      - sprout-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    env_file:
+      - .env
+    container_name: sprout_api
+    depends_on:
+      sprout-db:
+        condition: service_healthy
+    ports:
+      - '8000:8000'
+    networks:
+      - sprout-network
+
+  sprout-prisma-studio:
+    build: .
+    container_name: sprout-prisma-studio
+    command: npx prisma studio --browser none --port 5555
+    env_file:
+      - .env
+    ports:
+      - '5555:5555'
+    depends_on:
+      - sprout-db
+    networks:
+      - sprout-network
+
+networks:
+  sprout-network:
