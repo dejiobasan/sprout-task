@@ -22,6 +22,8 @@ export interface GetAllTasksData {
   totalTasks: number;
   currentPage: number;
   totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
 }
 
 export interface GetAllTasksResponse extends ApiResponse<GetAllTasksData> {}

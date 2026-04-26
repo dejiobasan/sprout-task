@@ -1,4 +1,10 @@
-import { IsString, IsNotEmpty, IsOptional, IsEnum, IsUUID } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  IsOptional,
+  IsEnum,
+  IsUUID,
+} from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -88,6 +94,8 @@ export class GetAllTaskResponseDto {
       totalTasks: 1,
       currentPage: 1,
       totalPages: 1,
+      hasNextPage: false,
+      hasPrevPage: false,
     },
   })
   data: {
@@ -101,11 +109,12 @@ export class GetAllTaskResponseDto {
     totalTasks: number;
     currentPage: number;
     totalPages: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
   };
   @ApiProperty()
   timestamp: string;
 }
-
 
 export class UpdateTaskStatusParamDto {
   @ApiProperty({
@@ -175,4 +184,3 @@ export class DeleteTaskResponseDto {
   @ApiProperty()
   timestamp: string;
 }
-    

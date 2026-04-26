@@ -49,6 +49,8 @@ export class TaskService {
     ]);
 
     const totalPages = Math.ceil(totalTasks / limitNumber);
+    const hasNextPage = pageNumber < totalPages;
+    const hasPrevPage = pageNumber > 1;
 
     return {
       success: true,
@@ -65,6 +67,8 @@ export class TaskService {
         totalTasks,
         currentPage: pageNumber,
         totalPages,
+        hasNextPage,
+        hasPrevPage,
       },
       timestamp: new Date().toISOString(),
     };
